@@ -6,6 +6,13 @@
 
 
 rescue:
-     - name: Print when errors
-       ansible.builtin.debug:
-         msg: 'I caught an error, can do stuff here to fix it, :-)'
+     - name: SENT E-MAIL
+       community.general.mail:
+    host: smtp.gmail.com
+    port: 587
+    username: username@gmail.com
+    password: mysecret
+    to: John Smith <john.smith@example.com>
+    subject: Ansible-report
+    body: System {{ ansible_hostname }} has been successfully provisioned.
+  delegate_to: localhost
